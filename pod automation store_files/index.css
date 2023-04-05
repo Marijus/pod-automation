@@ -177,11 +177,11 @@ img {
   }
 
   .icons {
-    margin-right: 3px;
+    margin-right: 4px;
   }
 
   .digits {
-    margin-right: 5px;
+    margin-right: 4px;
   }
 
   .digits-block {
@@ -190,12 +190,7 @@ img {
 }
 
 @media screen and (max-width: 375px) {
-  /* .icon {
-    padding-left: 8px;
-  } */
-
   .digits .digits-block {
     max-width: 20px;
-    max-height: 32px;
   }
 }

@@ -54,3 +54,38 @@ setInterval(() => {
     ".icons .slick-list"
   ).style.transform = `translate3d(0px, ${-40 * index}px, 0px)`;
 }, 3250);
+
+const centerContents = () => {
+  const texts = document.querySelectorAll(".texts .text span");
+
+  const windowWidth = window.innerWidth;
+
+  if (windowWidth <= 420) {
+    let w, width, height;
+
+    texts.forEach((text) => {
+      text.style.width = "auto";
+
+      if (texts[0].clientHeight >= 22) {
+        width = text.clientWidth;
+
+        for (w = width; w > 70; w--) {
+          height = text.clientHeight;
+
+          text.style.width = w + "px";
+
+          if (text.clientHeight > height) {
+            text.style.width = `${w + 5}px`;
+            break;
+          }
+        }
+      }
+    });
+  } else {
+    texts.forEach((text) => (text.style.width = "auto"));
+  }
+};
+
+window.addEventListener("load", centerContents);
+
+window.addEventListener("resize", centerContents);

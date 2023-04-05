@@ -10,6 +10,18 @@
   src: url("./fonts/Gilroy-Light.otf");
 }
 
+@font-face {
+  font-family: Futura;
+  font-weight: 700;
+  src: url("./fonts/Futura-Bold.ttf");
+}
+
+@font-face {
+  font-family: Futura;
+  font-weight: 400;
+  src: url("./fonts/Futura-Normal.ttf");
+}
+
 *,
 *::before,
 *::after {
@@ -24,11 +36,17 @@ body {
   height: 100%;
 }
 
+img {
+  max-width: 100% !important;
+}
+
 .top-content {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Gilroy", monospace;
+  color: #343434;
 }
 
 .slide {
@@ -36,16 +54,14 @@ body {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  padding: 0px 12px;
-  margin-bottom: 16px;
-  font-family: "Gilroy", monospace;
+  padding: 0px 16px;
+  margin-bottom: 6px;
 }
 
 .slick-list {
   display: grid;
   height: fit-content;
   align-items: center;
-  background: #000000;
 }
 
 /* counter start */
@@ -69,6 +85,10 @@ body {
   margin: 0 2.5px;
   border-radius: 0.35rem;
   overflow: hidden;
+}
+
+.digits-block .slick-list {
+  background-color: #000000;
 }
 
 .digits-block:last-child {
@@ -102,6 +122,7 @@ body {
 }
 
 .icons {
+  min-width: max-content;
   margin-right: 6px;
 }
 
@@ -116,12 +137,17 @@ body {
   display: flex;
   align-items: flex-end;
   background: #ffffff;
-  font-size: 14px;
   line-height: 1;
+}
+
+.text {
+  font-size: 14px;
 }
 
 .icon {
   width: 100%;
+  justify-content: flex-end;
+  font-size: 20px;
 }
 
 .icon img {
@@ -132,38 +158,42 @@ body {
 /* announcement start */
 .announcement {
   width: 100%;
-  font-size: 14px;
+  font-family: "Futura";
+  font-size: 11px;
   font-weight: 400;
   text-align: center;
-  line-height: 24px;
-  padding: 0px 12px;
+  line-height: 20px;
+  padding: 0px 16px;
 }
 /* announcement end */
 
 @media screen and (max-width: 480px) {
-  .text,
   .icon {
-    font-size: 12px;
+    font-size: 18px;
+  }
+
+  .text {
+    font-size: 11px;
   }
 
   .icons {
-    margin-right: 2.5px;
+    margin-right: 3px;
   }
 
   .digits {
-    margin-right: 2.5px;
+    margin-right: 5px;
   }
 
   .digits-block {
     margin: 0 1.5px;
   }
-
-  .announcement {
-    font-size: 12px;
-  }
 }
 
 @media screen and (max-width: 375px) {
+  /* .icon {
+    padding-left: 8px;
+  } */
+
   .digits .digits-block {
     max-width: 20px;
     max-height: 32px;

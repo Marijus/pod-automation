@@ -61,21 +61,24 @@ const centerContents = () => {
   const windowWidth = window.innerWidth;
 
   if (windowWidth <= 420) {
-    let w, width, height;
-
     texts.forEach((text) => {
       text.style.width = "auto";
 
       if (texts[0].clientHeight >= 22) {
-        width = text.clientWidth;
+        let width = Array.from(texts).reduce(
+          (prev, curr) => (prev > curr.clientWidth ? prev : curr.clientWidth),
+          -Infinity
+        );
 
-        for (w = width; w > 70; w--) {
-          height = text.clientHeight;
+        console.log("yard width: ", width);
+
+        for (let w = width; w > 70; w--) {
+          let height = text.clientHeight;
 
           text.style.width = w + "px";
 
-          if (text.clientHeight > height) {
-            text.style.width = `${w + 5}px`;
+          if (text.clientHeight > height && text.clientHeight > 22) {
+            text.style.width = `${w + 2}px`;
             break;
           }
         }

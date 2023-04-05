@@ -70,8 +70,6 @@ const centerContents = () => {
           -Infinity
         );
 
-        console.log("yard width: ", width);
-
         for (let w = width; w > 70; w--) {
           let height = text.clientHeight;
 

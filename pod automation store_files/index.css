@@ -194,3 +194,9 @@ img {
     max-width: 20px;
   }
 }
+
+@media screen and (max-width: 366px) {
+  .texts .text span {
+    max-width: 92px;
+  }
+}

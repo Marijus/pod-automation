@@ -1,5 +1,42 @@
 const slide = document.querySelector(".slide");
 
+/*const centerContents = () => {
+  const texts = document.querySelectorAll(".texts .text span");
+
+  const windowWidth = window.innerWidth;
+
+  if (windowWidth <= 420) {
+    texts.forEach((text) => {
+      text.style.width = "auto";
+
+      if (texts[0].clientHeight >= 22) {
+        let width = Array.from(texts).reduce(
+          (prev, curr) => (prev > curr.clientWidth ? prev : curr.clientWidth),
+          -Infinity
+        );
+
+        for (let w = width; w > 70; w--) {
+          let height = text.clientHeight;
+
+          text.style.width = w + "px";
+
+          if (text.clientHeight > height && text.clientHeight > 22) {
+            text.style.width = `${w + 2}px`;
+            break;
+          }
+        }
+      }
+    });
+  } else {
+    texts.forEach((text) => (text.style.width = "auto"));
+  }
+};
+
+centerContents();
+slide.style.opacity = 1;
+
+window.addEventListener("resize", centerContents);*/
+
 const value1 = slide?.dataset?.["value1"];
 const value2 = slide?.dataset?.["value2"];
 const digits = [
@@ -54,39 +91,3 @@ setInterval(() => {
     ".icons .slick-list"
   ).style.transform = `translate3d(0px, ${-40 * index}px, 0px)`;
 }, 3250);
-
-const centerContents = () => {
-  const texts = document.querySelectorAll(".texts .text span");
-
-  const windowWidth = window.innerWidth;
-
-  if (windowWidth <= 420) {
-    texts.forEach((text) => {
-      text.style.width = "auto";
-
-      if (texts[0].clientHeight >= 22) {
-        let width = Array.from(texts).reduce(
-          (prev, curr) => (prev > curr.clientWidth ? prev : curr.clientWidth),
-          -Infinity
-        );
-
-        for (let w = width; w > 70; w--) {
-          let height = text.clientHeight;
-
-          text.style.width = w + "px";
-
-          if (text.clientHeight > height && text.clientHeight > 22) {
-            text.style.width = `${w + 2}px`;
-            break;
-          }
-        }
-      }
-    });
-  } else {
-    texts.forEach((text) => (text.style.width = "auto"));
-  }
-};
-
-window.addEventListener("load", centerContents);
-
-window.addEventListener("resize", centerContents);

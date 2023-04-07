@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: monospace;
+}
+
+.timer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  color: #4994ca;
+  font-size: 28px;
+  font-weight: bold;
+  padding: 16px;
+}
+
+.timer-block {
+  text-align: center;
+  line-height: 1;
+  border: 1px solid #4994ca;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+@media screen and (max-width: 560px) {
+  .timer {
+    font-size: 20px;
+  }
+}

@@ -1,51 +1,39 @@
 const slide = document.querySelector(".slide");
 
-/*const centerContents = () => {
-  const texts = document.querySelectorAll(".texts .text span");
+let value1 = slide?.dataset?.["value1"];
+let value2 = slide?.dataset?.["value2"];
 
-  const windowWidth = window.innerWidth;
+const maxLength = Math.max(value1.length, value2.length);
 
-  if (windowWidth <= 420) {
-    texts.forEach((text) => {
-      text.style.width = "auto";
+console.log("lengths:", value1.length, value2.length);
+if (value1.length < maxLength) {
+  value1 = "0".repeat(maxLength - value1.length) + value1;
+}
+if (value2.length < maxLength) {
+  value2 = "0".repeat(maxLength - value2.length) + value2;
 
-      if (texts[0].clientHeight >= 22) {
-        let width = Array.from(texts).reduce(
-          (prev, curr) => (prev > curr.clientWidth ? prev : curr.clientWidth),
-          -Infinity
-        );
+}
 
-        for (let w = width; w > 70; w--) {
-          let height = text.clientHeight;
+const digitsContainer = document.querySelector('.digits');
+for (let i = 0; i < maxLength; i++) {
+  const digitBlock = document.createElement('div');
+  digitBlock.classList.add('digits-block');
+  digitsContainer.appendChild(digitBlock);
 
-          text.style.width = w + "px";
-
-          if (text.clientHeight > height && text.clientHeight > 22) {
-            text.style.width = `${w + 2}px`;
-            break;
-          }
-        }
-      }
-    });
-  } else {
-    texts.forEach((text) => (text.style.width = "auto"));
+  if (maxLength > 3 && i === maxLength - 4) {
+    const span = document.createElement('span');
+    span.textContent = ',';
+    digitsContainer.appendChild(span);
   }
-};
+}
 
-centerContents();
-slide.style.opacity = 1;
-
-window.addEventListener("resize", centerContents);*/
-
-const value1 = slide?.dataset?.["value1"];
-const value2 = slide?.dataset?.["value2"];
 const digits = [
   (value1 ?? "000000").split("").map((v) => +v),
   (value2 ?? "000000").split("").map((v) => +v),
 ];
 let index = 0;
 
-for (let i = 0; i < 6; i++) {
+for (let i = 0; i < maxLength; i++) {
   const block = document.querySelector(`.digits-block:nth-of-type(${i + 1})`);
 
   let list = document.createElement("div");

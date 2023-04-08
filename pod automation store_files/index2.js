@@ -9,43 +9,22 @@ const ONE_MIN = 1000 * 60;
 const ONE_SEC = 1000;
 
 const date = new Date(document.querySelector(".timer")?.dataset?.date ?? null);
-let timeDiff = date.getTime() - new Date().getTime();
+let intervalId;
 
-if (timeDiff >= 1) {
+intervalId = setInterval(() => {
+  let timeDiff = date.getTime() - new Date().getTime();
+
   let days = Math.floor(timeDiff / ONE_DAY);
-  let hrs = Math.floor((timeDiff -= days * ONE_DAY) / ONE_HOUR);
-  let mins = Math.floor((timeDiff -= hrs * ONE_HOUR) / ONE_MIN);
-  let secs = Math.floor((timeDiff - mins * ONE_MIN) / ONE_SEC);
-  let intervalId;
+  let hrs = Math.floor((timeDiff % ONE_DAY) / ONE_HOUR);
+  let mins = Math.floor((timeDiff % ONE_HOUR) / ONE_MIN);
+  let secs = Math.floor((timeDiff % ONE_MIN) / ONE_SEC);
 
-  const padNumber = (number, maxLength) => {
-    return number.toString().padStart(maxLength, "0");
-  };
+  if (timeDiff < 0) {
+    return clearInterval(intervalId);
+  }
 
-  const updateTimer = () => {
-    daysLeft.innerText = padNumber(days, 2);
-    hrsLeft.innerText = padNumber(hrs, 2);
-    minsLeft.innerText = padNumber(mins, 2);
-    secsLeft.innerText = padNumber(secs, 2);
-  };
-
-  intervalId = setInterval(() => {
-    if (secs === 0 && mins === 0 && hrs === 0 && days === 0) {
-      return clearInterval(intervalId);
-    }
-
-    if (hrs === 0 && mins === 0 && secs === 0) days = --days;
-
-    if (mins === 0 && secs === 0) {
-      hrs = hrs === 0 ? 23 : --hrs;
-    }
-
-    if (secs === 0) {
-      mins = mins === 0 ? 59 : --mins;
-    }
-
-    secs = secs <= 0 ? 59 : --secs;
-
-    updateTimer();
-  }, 1000);
-}
+  daysLeft.innerText = days.toString().padStart(2, "0");
+  hrsLeft.innerText = hrs.toString().padStart(2, "0");
+  minsLeft.innerText = mins.toString().padStart(2, "0");
+  secsLeft.innerText = secs.toString().padStart(2, "0");
+}, 1000);

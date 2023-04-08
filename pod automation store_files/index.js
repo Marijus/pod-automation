@@ -11,18 +11,17 @@ if (value1.length < maxLength) {
 }
 if (value2.length < maxLength) {
   value2 = "0".repeat(maxLength - value2.length) + value2;
-
 }
 
-const digitsContainer = document.querySelector('.digits');
+const digitsContainer = document.querySelector(".digits");
 for (let i = 0; i < maxLength; i++) {
-  const digitBlock = document.createElement('div');
-  digitBlock.classList.add('digits-block');
+  const digitBlock = document.createElement("div");
+  digitBlock.classList.add("digits-block");
   digitsContainer.appendChild(digitBlock);
 
   if (maxLength > 3 && i === maxLength - 4) {
-    const span = document.createElement('span');
-    span.textContent = ',';
+    const span = document.createElement("span");
+    span.textContent = ",";
     digitsContainer.appendChild(span);
   }
 }
@@ -58,7 +57,7 @@ setInterval(() => {
   // digits
   index = index === 0 ? ++index : --index;
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < maxLength; i++) {
     const list = document.querySelector(
       `.digits-block:nth-of-type(${i + 1}) .slick-list`
     );

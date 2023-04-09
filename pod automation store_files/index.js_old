@@ -3,46 +3,36 @@ const slide = document.querySelector(".slide");
 let value1 = slide?.dataset?.["value1"];
 let value2 = slide?.dataset?.["value2"];
 
-console.log("values: ", value1, value2);
+const maxLength = Math.max(value1.length, value2.length);
 
-const maxLength = Math.max((value1?.length ?? 0), (value2?.length ?? 0));
-
-if (value1 !== undefined && value1.length < maxLength) {
+if (value1.length < maxLength) {
   value1 = "0".repeat(maxLength - value1.length) + value1;
 }
-if (value2 !== undefined && value2.length < maxLength) {
+if (value2.length < maxLength) {
   value2 = "0".repeat(maxLength - value2.length) + value2;
+
 }
 
-const digits = [
-  // (value1 ?? "000000").split("").map((v) => +v),
-  // (value2 ?? "000000").split("").map((v) => +v),
-];
-if (value1 !== undefined) {
-  digits.push((value1 ?? "000000").split("").map((v) => +v));
-}
-if (value2 !== undefined) {
-  digits.push((value2 ?? "000000").split("").map((v) => +v));
-}
-let index = 0;
-
-// insert bunch of divs
 const digitsContainer = document.querySelector('.digits');
 for (let i = 0; i < maxLength; i++) {
   const digitBlock = document.createElement('div');
   digitBlock.classList.add('digits-block');
   digitsContainer.appendChild(digitBlock);
 
-  if (maxLength > 3 && i === maxLength - 4) {
-    const span = document.createElement('span');
-    span.textContent = ',';
-    digitsContainer.appendChild(span);
-  }
+  // if (maxLength > 3 && i === maxLength - 4) {
+  //   const span = document.createElement('span');
+  //   span.textContent = ',';
+  //   digitsContainer.appendChild(span);
+  // }
 }
 
-console.log("max length:", maxLength);
+const digits = [
+  (value1 ?? "000000").split("").map((v) => +v),
+  (value2 ?? "000000").split("").map((v) => +v),
+];
+let index = 0;
 
-for (let i = 0; i < maxLength; i++) {
+for (let i = 0; i < 6; i++) {
   const block = document.querySelector(`.digits-block:nth-of-type(${i + 1})`);
 
   let list = document.createElement("div");
@@ -67,7 +57,7 @@ setInterval(() => {
   // digits
   index = index === 0 ? ++index : --index;
 
-  for (let i = 0; i < maxLength; i++) {
+  for (let i = 0; i < 6; i++) {
     const list = document.querySelector(
       `.digits-block:nth-of-type(${i + 1}) .slick-list`
     );

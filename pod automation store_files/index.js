@@ -8,17 +8,32 @@ const textHeight =
 let value1 = slide?.dataset?.["value1"];
 let value2 = slide?.dataset?.["value2"];
 
-const maxLength = Math.max(value1.length, value2.length);
+console.log("values: ", value1, value2);
 
-console.log("lengths:", value1.length, value2.length);
-if (value1.length < maxLength) {
+const maxLength = Math.max((value1?.length ?? 0), (value2?.length ?? 0));
+
+if (value1 !== undefined && value1.length < maxLength) {
   value1 = "0".repeat(maxLength - value1.length) + value1;
 }
-if (value2.length < maxLength) {
+if (value2 !== undefined && value2.length < maxLength) {
   value2 = "0".repeat(maxLength - value2.length) + value2;
 }
 
+const digits = [
+  // (value1 ?? "000000").split("").map((v) => +v),
+  // (value2 ?? "000000").split("").map((v) => +v),
+];
+if (value1 !== undefined) {
+  digits.push((value1 ?? "000000").split("").map((v) => +v));
+}
+if (value2 !== undefined) {
+  digits.push((value2 ?? "000000").split("").map((v) => +v));
+}
+let index = 0;
+
+
 const digitsContainer = document.querySelector(".digits");
+
 for (let i = 0; i < maxLength; i++) {
   const digitBlock = document.createElement("div");
   digitBlock.classList.add("digits-block");
@@ -31,11 +46,7 @@ for (let i = 0; i < maxLength; i++) {
   }
 }
 
-const digits = [
-  (value1 ?? "000000").split("").map((v) => +v),
-  (value2 ?? "000000").split("").map((v) => +v),
-];
-let index = 0;
+console.log("max length:", maxLength);
 
 for (let i = 0; i < maxLength; i++) {
   const block = document.querySelector(`.digits-block:nth-of-type(${i + 1})`);

@@ -184,7 +184,16 @@ img {
   align-items: center;
   font-family: "Gilroy", "Assistant", sans-serif;
   font-weight: 700;
-  padding: 16px;
+  padding: 6px 0px;
+}
+
+.timer .digits {
+  margin-right: 0;
+}
+
+.timer .icon {
+  line-height: 1.2;
+  margin-right: 8px;
 }
 
 .timer .digits-block {
@@ -197,6 +206,10 @@ img {
 .timer .digits-block span {
   height: var(--timer-digits-block-height);
   letter-spacing: 0.05em;
+}
+
+.timer .digits > span {
+  margin: 0 2px;
 }
 /* timer end */
 

@@ -26,16 +26,17 @@ if (value2 !== undefined) {
 }
 let index = 0;
 
-// insert bunch of divs
-const digitsContainer = document.querySelector('.digits');
+
+const digitsContainer = document.querySelector(".digits");
+
 for (let i = 0; i < maxLength; i++) {
-  const digitBlock = document.createElement('div');
-  digitBlock.classList.add('digits-block');
+  const digitBlock = document.createElement("div");
+  digitBlock.classList.add("digits-block");
   digitsContainer.appendChild(digitBlock);
 
   if (maxLength > 3 && i === maxLength - 4) {
-    const span = document.createElement('span');
-    span.textContent = ',';
+    const span = document.createElement("span");
+    span.textContent = ",";
     digitsContainer.appendChild(span);
   }
 }

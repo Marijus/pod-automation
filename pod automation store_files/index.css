@@ -181,10 +181,10 @@ img {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   font-family: "Gilroy", "Assistant", sans-serif;
   font-weight: 700;
-  padding: 6px 0px;
+  padding: 6px 16px;
 }
 
 .timer .digits {

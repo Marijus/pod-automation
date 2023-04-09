@@ -187,13 +187,11 @@ img {
   padding: 6px 16px;
 }
 
-.timer .digits {
-  margin-right: 0;
-}
-
-.timer .icon {
-  line-height: 1.2;
-  margin-right: 8px;
+.timer .icons,
+.timer .texts,
+.timer .icon,
+.timer .text {
+  height: auto;
 }
 
 .timer .digits-block {
@@ -209,7 +207,7 @@ img {
 }
 
 .timer .digits > span {
-  margin: 0 2px;
+  margin: 0 1.5px;
 }
 /* timer end */
 
@@ -232,5 +230,10 @@ img {
 
   .digits-block {
     margin: 0 1.5px;
+  }
+
+  .timer .icons,
+  .timer .digits {
+    margin-right: 6px;
   }
 }

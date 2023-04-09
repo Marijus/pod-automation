@@ -22,6 +22,14 @@
   src: url("./fonts/Futura-Normal.ttf");
 }
 
+:root {
+  --digits-block-height: 30px;
+  --digits-block-width: 20px;
+  --timer-digits-block-height: 35px;
+  --timer-digits-block-width: 30px;
+  --text-height: 40px;
+}
+
 *,
 *::before,
 *::after {
@@ -75,16 +83,16 @@ img {
 
 .digits-block {
   display: block !important;
-  height: 34px;
-  width: 24px;
-  max-width: 20px;
-  max-height: 30px;
+  max-height: var(--digits-block-height);
+  max-width: var(--digits-block-width);
+  height: var(--digits-block-height);
+  width: var(--digits-block-width);
   background-color: #000000;
   color: #ffffff;
   font-size: 16px;
   font-weight: 700;
   margin: 0 2.5px;
-  border-radius: 0.35rem;
+  border-radius: 4px;
   overflow: hidden;
 }
 
@@ -101,7 +109,7 @@ img {
 }
 
 .digits-block span {
-  height: 30px;
+  height: var(--digits-block-height);
   width: 100%;
   display: flex;
   align-items: center;
@@ -116,14 +124,14 @@ img {
 /* texts / icons start */
 .texts,
 .icons {
-  height: 40px;
+  height: var(--text-height);
   font-size: 14px;
   font-weight: 700;
   overflow: hidden;
 }
 
 .icons {
-  width: 40px;
+  width: var(--text-height);
   min-width: max-content;
   margin-right: 6px;
 }
@@ -135,7 +143,7 @@ img {
 
 .text,
 .icon {
-  height: 40px;
+  height: var(--text-height);
   display: flex;
   align-items: flex-end;
   line-height: 1.2;
@@ -146,7 +154,7 @@ img {
 }
 
 .icon {
-  width: 40px;
+  width: var(--text-height);
   justify-content: flex-end;
   font-size: 20px;
 }
@@ -168,6 +176,30 @@ img {
 }
 /* announcement end */
 
+/* timer start */
+.timer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Gilroy", "Assistant", sans-serif;
+  font-weight: 700;
+  padding: 16px;
+}
+
+.timer .digits-block {
+  max-height: var(--timer-digits-block-height);
+  max-width: var(--timer-digits-block-width);
+  height: var(--timer-digits-block-height);
+  width: var(--timer-digits-block-width);
+}
+
+.timer .digits-block span {
+  height: var(--timer-digits-block-height);
+  letter-spacing: 0.05em;
+}
+/* timer end */
+
 @media screen and (max-width: 480px) {
   .icon {
     font-size: 18px;
@@ -187,11 +219,5 @@ img {
 
   .digits-block {
     margin: 0 1.5px;
-  }
-}
-
-@media screen and (max-width: 375px) {
-  .digits .digits-block {
-    max-width: 20px;
   }
 }

@@ -1,5 +1,10 @@
 const slide = document.querySelector(".slide");
 
+const style = getComputedStyle(document.body);
+const blockHeight =
+  style.getPropertyValue("--digits-block-height").match(/\d+/)?.[0] ?? 30;
+const textHeight =
+  style.getPropertyValue("--text-height").match(/\d+/)?.[0] ?? 40;
 let value1 = slide?.dataset?.["value1"];
 let value2 = slide?.dataset?.["value2"];
 
@@ -41,13 +46,13 @@ for (let i = 0; i < maxLength; i++) {
   block.appendChild(list);
 
   const initial = digits[index][i];
-  list.style.transform = `translate3d(0px, -${initial * 30}px, 0px)`;
+  list.style.transform = `translate3d(0px, -${initial * blockHeight}px, 0px)`;
 
   list.style.transition = `transform 1750ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s`;
 
   new Array(i === 0 ? 10 : 30)
     .fill(null)
-    .map(
+    .forEach(
       (_, i) =>
         (list.innerHTML += `<span>${i >= 10 ? i.toString()[1] : i}</span>`)
     );
@@ -65,16 +70,18 @@ setInterval(() => {
     const destination =
       index === 1 && i !== 0 ? digits[index][i] + 20 : digits[index][i];
 
-    list.style.transform = `translate3d(0px, ${-30 * destination}px, 0px)`;
+    list.style.transform = `translate3d(0px, ${
+      -blockHeight * destination
+    }px, 0px)`;
   }
 
   // texts
   document.querySelector(
     ".texts .slick-list"
-  ).style.transform = `translate3d(0px, ${-40 * index}px, 0px)`;
+  ).style.transform = `translate3d(0px, ${-textHeight * index}px, 0px)`;
 
   // icons
   document.querySelector(
     ".icons .slick-list"
-  ).style.transform = `translate3d(0px, ${-40 * index}px, 0px)`;
+  ).style.transform = `translate3d(0px, ${-textHeight * index}px, 0px)`;
 }, 3250);

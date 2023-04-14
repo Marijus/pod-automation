@@ -10,7 +10,7 @@ const startDate = new Date(counter?.dataset?.start_date ?? null).getTime();
 const endDate = new Date(counter?.dataset.end_date ?? null).getTime();
 const startCount = +counter?.dataset.start_count ?? 1000;
 const endCount = +counter?.dataset.end_count ?? 2000;
-const frequency = counter?.dataset.frequency ?? 1000;
+const frequency = +counter?.dataset.frequency ?? 1000;
 const initDiff = endDate - startDate;
 const maxCountLength = endCount.toFixed(0).length;
 let diff = new Date().getTime() - startDate;
@@ -29,7 +29,6 @@ intervalId = setInterval(() => {
     (diff / initDiff) * (endCount - startCount) +
     startCount
   ).toFixed();
-  const hasEnded = diff > initDiff;
 
   if (count === 0) {
     for (let i = 0; i < maxCountLength; i++) {
@@ -80,5 +79,5 @@ intervalId = setInterval(() => {
     }px, 0px)`;
   }
 
-  count += 1;
+  ++count;
 }, frequency);

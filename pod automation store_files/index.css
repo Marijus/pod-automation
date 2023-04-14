@@ -210,6 +210,18 @@ img {
 }
 /* timer end */
 
+/* counter start */
+.counter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  font-family: "Gilroy", "Assistant", sans-serif;
+  font-weight: 700;
+  padding: 6px 16px;
+}
+/* counter end */
+
 @media screen and (max-width: 480px) {
   .icon {
     font-size: 18px;

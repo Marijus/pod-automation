@@ -10,7 +10,7 @@ let value2 = slide?.dataset?.["value2"];
 
 console.log("values: ", value1, value2);
 
-const maxLength = Math.max((value1?.length ?? 0), (value2?.length ?? 0));
+const maxLength = Math.max(value1?.length ?? 0, value2?.length ?? 0);
 
 if (value1 !== undefined && value1.length < maxLength) {
   value1 = "0".repeat(maxLength - value1.length) + value1;
@@ -30,7 +30,6 @@ if (value2 !== undefined) {
   digits.push((value2 ?? "000000").split("").map((v) => +v));
 }
 let index = 0;
-
 
 const digitsContainer = document.querySelector(".digits");
 

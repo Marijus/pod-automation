@@ -15,21 +15,14 @@ const blockHeight =
     .getPropertyValue("--digits-block-height")
     .match(/\d+/)?.[0] ?? 35;
 let intervalId;
-let count = 0;
 
-intervalId = setInterval(() => {
-  diff += frequency;
-
-  let currentCount = (
-    (diff / initDiff) * (endCount - startCount) +
-    startCount
-  ).toFixed();
+const renderBlocks = (currentCount) => {
+  // update blocks
   const currentCountLength = currentCount.length;
 
   if (currentCountLength > maxCountLength) {
-    // update blocks
     for (let i = 0; i < currentCountLength; i++) {
-      const isNew = i > maxCountLength - 1;
+      const isNew = i >= maxCountLength;
 
       if (isNew) {
         const digitBlock = document.createElement("div");
@@ -41,7 +34,7 @@ intervalId = setInterval(() => {
 
         digitBlock.appendChild(list);
 
-        list.style.transform = `translate3d(0px, -${
+        list.style.transform = `translate3d(0px, ${
           -blockHeight * currentCount[i]
         }px, 0px)`;
         list.style.transition = `transform 750ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s`;
@@ -59,7 +52,7 @@ intervalId = setInterval(() => {
         (currentCountLength - (i + 1)) % 3 === 0 &&
         i !== currentCountLength - 1
       ) {
-        if (nextElement?.nodeName === "SPAN") continue;
+        if (nextElement?.nodeName === "SPAN") return;
 
         const span = document.createElement("span");
         span.textContent = ",";
@@ -74,16 +67,33 @@ intervalId = setInterval(() => {
 
     maxCountLength = currentCountLength;
   }
+};
 
-  if (diff > initDiff || diff < 0) return clearInterval(intervalId);
+// render on load
+const currentCount = (
+  (diff / initDiff) * (endCount - startCount) +
+  startCount
+).toFixed();
+renderBlocks(diff > initDiff ? endCount.toString() : currentCount);
+
+intervalId = setInterval(() => {
+  diff += frequency;
+
+  const currentCount = (
+    (diff / initDiff) * (endCount - startCount) +
+    startCount
+  ).toFixed();
+
+  // rerender
+  renderBlocks(currentCount);
 
   for (let i = 0; i < maxCountLength; i++) {
+    const max = diff > initDiff ? endCount.toString() : currentCount;
+
     document.querySelector(
       `.counter .digits-block:nth-of-type(${i + 1}) .slick-list`
-    ).style.transform = `translate3d(0px, ${
-      -blockHeight * currentCount[i]
-    }px, 0px)`;
+    ).style.transform = `translate3d(0px, ${-blockHeight * max[i]}px, 0px)`;
   }
 
-  ++count;
+  if (diff > initDiff || diff < 0) return clearInterval(intervalId);
 }, frequency);

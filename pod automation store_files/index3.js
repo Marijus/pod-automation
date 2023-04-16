@@ -75,7 +75,7 @@ intervalId = setInterval(() => {
     maxCountLength = currentCountLength;
   }
 
-  if (diff > initDiff) return clearInterval(intervalId);
+  if (diff > initDiff || diff < 0) return clearInterval(intervalId);
 
   for (let i = 0; i < maxCountLength; i++) {
     document.querySelector(

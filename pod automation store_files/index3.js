@@ -7,8 +7,10 @@ const startCount = +counter?.dataset.start_count ?? 1000;
 const endCount = +counter?.dataset.end_count ?? 2000;
 const frequency = +counter?.dataset.frequency ?? 1000;
 const initDiff = endDate - startDate;
+const countDiff = endCount - startCount;
 let diff = new Date().getTime() - startDate;
-let maxCountLength = 0;
+let maxCountLength = countDiff < 0 ? startCount.toString().length : 0;
+let isFirstRender = true;
 
 const blockHeight =
   getComputedStyle(document.body)
@@ -20,9 +22,14 @@ const renderBlocks = (currentCount) => {
   // update blocks
   const currentCountLength = currentCount.length;
 
-  if (currentCountLength > maxCountLength) {
+  if (
+    (countDiff < 0
+      ? currentCountLength < maxCountLength
+      : currentCountLength > maxCountLength) ||
+    isFirstRender
+  ) {
     for (let i = 0; i < currentCountLength; i++) {
-      const isNew = i >= maxCountLength;
+      const isNew = countDiff < 0 ? i < maxCountLength : i >= maxCountLength;
 
       if (isNew) {
         const digitBlock = document.createElement("div");
@@ -67,32 +74,40 @@ const renderBlocks = (currentCount) => {
 
     maxCountLength = currentCountLength;
   }
+
+  isFirstRender = false;
 };
 
 // render on load
-const currentCount = (
-  (diff / initDiff) * (endCount - startCount) +
-  startCount
-).toFixed();
-renderBlocks(diff > initDiff ? endCount.toString() : currentCount);
+const firstRenderCount =
+  diff > initDiff
+    ? endCount.toString()
+    : (countDiff < 0
+        ? startCount - (diff / initDiff) * Math.abs(countDiff)
+        : startCount + (diff / initDiff) * Math.abs(countDiff)
+      ).toFixed();
+renderBlocks(diff > initDiff ? endCount.toString() : firstRenderCount);
 
 intervalId = setInterval(() => {
   diff += frequency;
 
-  const currentCount = (
-    (diff / initDiff) * (endCount - startCount) +
-    startCount
-  ).toFixed();
+  const currentCount =
+    diff > initDiff
+      ? endCount.toString()
+      : (countDiff < 0
+          ? startCount - (diff / initDiff) * Math.abs(countDiff)
+          : startCount + (diff / initDiff) * Math.abs(countDiff)
+        ).toFixed();
 
   // rerender
   renderBlocks(currentCount);
 
   for (let i = 0; i < maxCountLength; i++) {
-    const max = diff > initDiff ? endCount.toString() : currentCount;
-
     document.querySelector(
       `.counter .digits-block:nth-of-type(${i + 1}) .slick-list`
-    ).style.transform = `translate3d(0px, ${-blockHeight * max[i]}px, 0px)`;
+    ).style.transform = `translate3d(0px, ${
+      -blockHeight * currentCount[i]
+    }px, 0px)`;
   }
 
   if (diff > initDiff || diff < 0) return clearInterval(intervalId);

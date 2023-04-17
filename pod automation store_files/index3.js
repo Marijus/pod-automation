@@ -36,12 +36,6 @@ const renderBlocks = (currentCount) => {
 
       if (shouldUpdate || firstRender) {
         if (countDiff < 0 && !firstRender) {
-          console.log(
-            "removing: ",
-            document.querySelector(
-              `.digits-block:nth-of-type(${maxCountLength - 1 - i})`
-            )
-          );
           document
             .querySelector(
               `.digits-block:nth-of-type(${maxCountLength - 1 - i})`

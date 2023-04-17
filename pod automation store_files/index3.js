@@ -10,7 +10,7 @@ const initDiff = endDate - startDate;
 const countDiff = endCount - startCount;
 let diff = new Date().getTime() - startDate;
 let maxCountLength = countDiff < 0 ? startCount.toString().length : 0;
-let isFirstRender = true;
+let firstRender = true;
 
 const blockHeight =
   getComputedStyle(document.body)
@@ -26,29 +26,46 @@ const renderBlocks = (currentCount) => {
     (countDiff < 0
       ? currentCountLength < maxCountLength
       : currentCountLength > maxCountLength) ||
-    isFirstRender
+    firstRender
   ) {
     for (let i = 0; i < currentCountLength; i++) {
-      const isNew = countDiff < 0 ? i < maxCountLength : i >= maxCountLength;
+      const shouldUpdate =
+        countDiff < 0
+          ? maxCountLength - i - 1 >= currentCountLength
+          : i >= maxCountLength;
 
-      if (isNew) {
-        const digitBlock = document.createElement("div");
-        digitBlock.classList.add("digits-block");
-        digitsContainer.appendChild(digitBlock);
+      if (shouldUpdate || firstRender) {
+        if (countDiff < 0 && !firstRender) {
+          console.log(
+            "removing: ",
+            document.querySelector(
+              `.digits-block:nth-of-type(${maxCountLength - 1 - i})`
+            )
+          );
+          document
+            .querySelector(
+              `.digits-block:nth-of-type(${maxCountLength - 1 - i})`
+            )
+            .remove();
+        } else {
+          const digitBlock = document.createElement("div");
+          digitBlock.classList.add("digits-block");
+          digitsContainer.appendChild(digitBlock);
 
-        const list = document.createElement("div");
-        list.classList.add("slick-list");
+          const list = document.createElement("div");
+          list.classList.add("slick-list");
 
-        digitBlock.appendChild(list);
+          digitBlock.appendChild(list);
 
-        list.style.transform = `translate3d(0px, ${
-          -blockHeight * currentCount[i]
-        }px, 0px)`;
-        list.style.transition = `transform 750ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s`;
+          list.style.transform = `translate3d(0px, ${
+            -blockHeight * currentCount[i]
+          }px, 0px)`;
+          list.style.transition = `transform 750ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s`;
 
-        new Array(10)
-          .fill(null)
-          .forEach((_, i) => (list.innerHTML += `<span>${i}</span>`));
+          new Array(10)
+            .fill(null)
+            .forEach((_, i) => (list.innerHTML += `<span>${i}</span>`));
+        }
       }
 
       const nextElement = document.querySelector(
@@ -75,7 +92,7 @@ const renderBlocks = (currentCount) => {
     maxCountLength = currentCountLength;
   }
 
-  isFirstRender = false;
+  firstRender = false;
 };
 
 // render on load

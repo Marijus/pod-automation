@@ -123,6 +123,8 @@ img {
 .texts,
 .icons {
   height: var(--text-height);
+  display: flex;
+  justify-content: flex-end;
   font-size: 14px;
   font-weight: 700;
   overflow: hidden;
@@ -134,17 +136,6 @@ img {
   margin-right: 8px;
 }
 
-.timer .icons,
-.counter .icons {
-  display: flex;
-  align-items: flex-end;
-}
-
-.timer .icon:not(:nth-of-type(1)),
-.counter .icon:not(:nth-of-type(1)) {
-  width: auto;
-}
-
 .texts .slick-list,
 .icons .slick-list {
   transition: transform 900ms cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
@@ -153,6 +144,7 @@ img {
 .text,
 .icon {
   height: var(--text-height);
+  /* width: var(--text-height); */
   display: flex;
   align-items: flex-end;
   line-height: 1.2;
@@ -163,7 +155,6 @@ img {
 }
 
 .icon {
-  width: var(--text-height);
   justify-content: flex-end;
   font-size: 20px;
 }

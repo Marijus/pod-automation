@@ -144,7 +144,6 @@ img {
 .text,
 .icon {
   height: var(--text-height);
-  /* width: var(--text-height); */
   display: flex;
   align-items: flex-end;
   line-height: 1.2;
@@ -155,8 +154,14 @@ img {
 }
 
 .icon {
+  min-width: var(--text-height);
   justify-content: flex-end;
   font-size: 20px;
+}
+
+.timer .icon:not(:nth-child(1)),
+.counter .icon:not(:nth-child(1)) {
+  min-width: auto;
 }
 
 .icon img {

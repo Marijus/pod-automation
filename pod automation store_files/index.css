@@ -123,6 +123,8 @@ img {
 .texts,
 .icons {
   height: var(--text-height);
+  display: flex;
+  justify-content: flex-end;
   font-size: 14px;
   font-weight: 700;
   overflow: hidden;
@@ -132,17 +134,6 @@ img {
   width: var(--text-height);
   min-width: max-content;
   margin-right: 8px;
-}
-
-.timer .icons,
-.counter .icons {
-  display: flex;
-  align-items: flex-end;
-}
-
-.timer .icon:not(:nth-of-type(1)),
-.counter .icon:not(:nth-of-type(1)) {
-  width: auto;
 }
 
 .texts .slick-list,
@@ -163,9 +154,14 @@ img {
 }
 
 .icon {
-  width: var(--text-height);
+  min-width: var(--text-height);
   justify-content: flex-end;
   font-size: 20px;
+}
+
+.timer .icon:not(:nth-child(1)),
+.counter .icon:not(:nth-child(1)) {
+  min-width: auto;
 }
 
 .icon img {
